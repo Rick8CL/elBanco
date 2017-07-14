@@ -21,7 +21,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/bancodb?useSSL=false"/>
         <property name="username" value="root"/>
-        <property name="password" value="toor"/>
+        <property name="password" value="Mexico123"/>
     </bean>
 
 	<bean id="beanEMF" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
