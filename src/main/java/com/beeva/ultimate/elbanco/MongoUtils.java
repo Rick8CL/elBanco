@@ -29,7 +29,7 @@ public class MongoUtils {
     		mc = new MongoClient(host,puerto);
     		System.out.println("Conectado a MongoDB");
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error "+e);
 		}
 	}
 	

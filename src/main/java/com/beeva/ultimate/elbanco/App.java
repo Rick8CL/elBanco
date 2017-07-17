@@ -63,11 +63,11 @@ public class App {
         
         MongoUtils mongo = (MongoUtils) context.getBean("mongoBean");
         
-        Cliente cli = new Cliente();
-        Cuenta cu = new Cuenta();
-        BancosClientes bc = new BancosClientes();
-        Banco b = new Banco();
-        TipoCuenta tc = new TipoCuenta();
+        Cliente cli;
+        Cuenta cu;
+        BancosClientes bc;
+        Banco b;
+        TipoCuenta tc;
         
         //Agregamos manualmente los Bancos y los Tipos de Cuenta
         if(bancodao.getBancoById(1)==(null)){
@@ -212,8 +212,6 @@ public class App {
                         break;
                       
                     case 2:
-                    	cu = new Cuenta();
-                    	bc = new BancosClientes();
                         lector = new Scanner(System.in);
                         System.out.println("# de Cliente a Buscar");
                         
@@ -238,7 +236,7 @@ public class App {
                     
                     case 3:
                     	cu = new Cuenta();
-                    	bc = new BancosClientes();
+                    	
                         lector = new Scanner(System.in);
                         System.out.println("# de Cliente existente");
                         
@@ -314,6 +312,7 @@ public class App {
                         break;
                         
                     case 5:
+                    	cu=new Cuenta();
                     	List<Cuenta> list;
                     	lector = new Scanner(System.in);
                     	System.out.println("Numero de Cliente:");
@@ -440,7 +439,7 @@ public class App {
                                         		System.out.println("Drool dice: "+drool.getSospecha());
                                         	}
                                         }catch(Exception t){
-                                        	t.printStackTrace();
+                                        	System.out.println("Error "+t);
                                         }
                                 	}else{
                                 		System.out.println("Cantidad inválida! Transascción cancelada...");
@@ -458,6 +457,7 @@ public class App {
                         }
                         break;    
                     case 7:
+                    	cu = new Cuenta();
                     	List<Cuenta> listr;
                     	lector = new Scanner(System.in);
                         System.out.println("Numero de Cliente:");

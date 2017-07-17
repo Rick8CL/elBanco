@@ -26,8 +26,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.beeva.ultimate.elbanco.dao.model.BancosClientes;
-import com.beeva.ultimate.elbanco.dao.model.Cliente;
 import com.beeva.ultimate.elbanco.dao.model.Cuenta;
 import com.beeva.ultimate.elbanco.dao.inter.CuentaDAO;
 
@@ -42,7 +40,6 @@ public class CuentaDAOImpl extends CuentaDAO {
 		int x = cuenta.getIdtipocuenta();
 		if(x==1){
 			System.out.println("Deposito en Cuenta de Ahorro");
-			boolean flag=false;
 			double saldo=cuenta.getBalance();
 			System.out.println("Al saldo anterior "+saldo);
 			saldo = saldo + dinero;
@@ -52,28 +49,27 @@ public class CuentaDAOImpl extends CuentaDAO {
 			
 			em.merge(cuenta);
 			
-			flag = true;
+			
 			return cuenta;
 		}else if(x==2){
 			System.out.println("Deposito en Cuenta de Cheques");
-			boolean flag=false;
+			
 			int dia=0;
 			double saldo=cuenta.getBalance();
 			Date hoy = new Date();
 			
 			dia=hoy.getDay();
-			//dia=6;
 			
 			if(dia==6 || dia==7){
 				System.out.println("No puedes depositar efectivo los fines de semana");
-				flag=false;
+				
 			}else{
 				System.out.println("Al saldo anterior "+saldo);
 				saldo = saldo + dinero;
 				System.out.println("Saldo despues del deposito "+saldo);
 				cuenta.setBalance(saldo);
 				em.merge(cuenta);
-				flag=true;
+				
 			}
 			
 			return cuenta;
@@ -88,40 +84,40 @@ public class CuentaDAOImpl extends CuentaDAO {
 		int x = cuenta.getIdtipocuenta();
 		if(x==1){
 			System.out.println("Retiro en Cuenta de Ahorro");
-			boolean flag=false;
+			
 			double saldo=cuenta.getBalance();
 			System.out.println("Al saldo anterior "+saldo);
 			saldo = saldo - dinero;
 			if(saldo<5000){
 				System.out.println("No puedes tener menos de $5000");
-				flag=false;
+				
 			}else{
 				cuenta.setBalance(saldo);
 				em.merge(cuenta);
-				flag=true;
+				
 			}
 			return cuenta;
 
 		}else if(x==2){
 			System.out.println("Retiro en Cuenta de Cheques");
-			boolean flag=false;
+			
 			int dia=0;
 			double saldo=cuenta.getBalance();
 			Date hoy = new Date();
 			
 			dia=hoy.getDay();
-			System.out.println(dia);
-			//dia=6;
+			
+			
 			
 			if(dia==0 || dia==6){
 				System.out.println("No puedes retirar efectivo los fines de semana");
-				flag=false;
+				
 			}else{
 				System.out.println("Al saldo anterior "+saldo);
 				saldo = saldo - dinero;
 				cuenta.setBalance(saldo);
 				em.merge(cuenta);
-				flag=true;
+				
 			}
 			
 			return cuenta;
@@ -159,7 +155,7 @@ public class CuentaDAOImpl extends CuentaDAO {
 	}
 	
 	public List<Cuenta> getCuentasByCliente(int idcliente){
-		Query query = em.createQuery("select cu "+"from Cuenta cu where idcliente='"+idcliente+"'");
+		Query query = em.createQuery("select cu from Cuenta cu where idcliente='"+idcliente+"'");
         List<Cuenta> list=(List<Cuenta>)query.getResultList();
         
         for(int i=0;i<list.size();i++){
